@@ -1,0 +1,82 @@
+<link rel="import" href="../polymer/polymer.html" />
+
+
+<dom-module id="tlg-video-ad">
+    <template>
+        <template is="dom-if" if="[[_url]]">
+        <iframe src="[[_url]]" height="[[height]]" width="[[width]]" frameborder="0" allowfullscreen></iframe>            
+        </template>
+       <!--  <template is="dom-if" if="[[!_url]]">
+            <template is="dom-if" if="[[imageUrl]]">
+                <t-image height="[[height]]" width="[[width]]" src="[[imageUrl]]" ></t-image>
+            </template>
+        </template> -->
+    </template>
+</dom-module>
+<script>
+Polymer({
+    is: "tlg-video-ad",
+
+    properties: {
+        _url: {
+            type: String,
+            value: ''
+        },
+
+        url: {
+            type: String,
+            value: '',
+            observer: '_urlChanged',
+            reflectToAttribute:true,
+        },
+
+        // title: {
+        //     type: String,
+        //     value: ''
+        // },
+
+        height: {
+            type: String,
+            value: '',
+            reflectToAttribute:true,
+        },
+
+        width: {
+            type: String,
+            value: '',
+            reflectToAttribute:true,
+        },
+
+        // imageUrl: {
+        //     type: String,
+        //     value: ''
+        // }
+
+    },
+
+    _urlChanged: function(){
+        if(this.url){
+            var videoPath = this.url.toLowerCase();
+            var youtubeUrl = '//www.youtube.com/embed/';
+            var vimeoUrl = '//player.vimeo.com/video/';
+            if(videoPath.indexOf('iframe') != -1){
+                var tempElem = document.createElement('div');
+                tempElem.innerHTML = videoPath;
+                this._url = tempElem.children[0].src; //this is common of both youtube and vimeo
+            }
+            else if(videoPath.indexOf('youtube.com/embed') != -1 ){
+                this._url = this.url;
+            }
+            else if(videoPath.indexOf('youtube.com/watch') != -1){
+                this._url = youtubeUrl + this.url.substring(videoPath.indexOf('v=') + 2, videoPath.length );
+            }    
+            else if(videoPath.indexOf('vimeo') !=1){
+                this._url = vimeoUrl + this.url.substring(videoPath.lastIndexOf('/') +1 , videoPath.length );
+            }
+               
+            console.log(this.url, this._url);
+        }
+    }
+
+});
+</script>

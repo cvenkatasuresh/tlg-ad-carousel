@@ -1,0 +1,137 @@
+[
+{
+  "Id": 1,
+  "IsActive": true,
+  "Name": "Test Ad",
+  "Size": "100*200",
+  "MediaList": [
+    {
+      "Url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_153_b.jpg",
+      "Title": "Image 1",
+      "Type": "image",
+      "AdditionalInfo": [
+        {
+          "Key": "Media key 1",
+          "Value": "Media value 1"
+        }
+      ]
+    },
+    {
+      "Url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_154_b.jpg",
+      "Title": "Image 2",
+      "Type": "image",
+      "AdditionalInfo": [
+        {
+          "Key": "Media key 1",
+          "Value": "Media value 1"
+        }
+      ]
+    },
+    {
+      "Url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_156_b.jpg",
+      "Title": "Image 3",
+      "Type": "image",
+      "AdditionalInfo": [
+        {
+          "Key": "Media key 1",
+          "Value": "Media value 1"
+        }
+      ]
+    }
+  ],
+  
+  "ActiveMediaType": "Image",
+  "LandingUrl": {
+    "Url": "http://bookairfare.com",
+    "OpenInNewWindow": false,
+    "AdditionalInfo": [
+      {
+        "Key": "Key",
+        "Value": "value"
+      }
+    ]
+  },  
+  "AdditionalInfo": [
+    {
+      "Key": "adKey1",
+      "value": "value1"
+    }
+  ]
+},
+{
+  "Id": 2,
+  "IsActive": true,
+  "Name": "Test Ad",
+  "Size": "100*200",
+  "MediaList": [
+    {
+      "Url": "https://www.youtube.com/watch?v=OViH68fJUhM",
+      "Title": "Video 1",
+      "Type": "video",
+      "AdditionalInfo": [
+        {
+          "Key": "Media key 1",
+          "Value": "Media value 1"
+        }
+      ]
+    }
+  ],
+  
+  "ActiveMediaType": "Video",
+  "LandingUrl": {
+    "Url": "http://bookairfare.com",
+    "OpenInNewWindow": false,
+    "AdditionalInfo": [
+      {
+        "Key": "Key",
+        "Value": "value"
+      }
+    ]
+  },  
+  "AdditionalInfo": [
+    {
+      "Key": "adKey1",
+      "value": "value1"
+    }
+  ]
+},
+{
+  "Id": 3,
+  "IsActive": true,
+  "Name": "Test Ad",
+  "Size": "100*200",
+  "MediaList": [
+    {
+      "Url": "",
+      "Title": "Text Ad 1",
+      "Type": "Text",
+      "AdditionalInfo": [
+        {
+          "Key": "Content",
+          "Value": "Test Ad Content"
+        }
+      ]
+    }
+  ],
+  
+  "ActiveMediaType": "Image",
+  "LandingUrl": {
+    "Url": "http://bookairfare.com",
+    "OpenInNewWindow": false,
+    "AdditionalInfo": [
+      {
+        "Key": "Key",
+        "Value": "value"
+      }
+    ]
+  },  
+  "AdditionalInfo": [
+    {
+      "Key": "adKey1",
+      "value": "value1"
+    }
+  ]
+}
+]
+
+

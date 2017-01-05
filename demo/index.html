@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <title>t-carousel demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../iron-ajax/iron-ajax.html" />
+    <link rel="import" href="../tlg-ad-carousel.html">
+    
+</head>
+
+<body>
+    <style>
+    .div {
+        background: #000;
+        color: #fff;
+        width: 100%;
+        height: 300px;
+    }
+    
+    t-button {
+        background: #000;
+    }
+    </style>
+    <tlg-ad-carousel style="height: 300px; width: 300px"></tlg-ad-carousel>
+    <iron-ajax  id="call" url="mockdata2.json" headers='{"accept": "application/json"}' content-type="application/json" handle-as="json">
+
+    <script>
+    document.addEventListener('WebComponentsReady', function() {
+        var ajax = document.querySelector('#call');
+        var adCarouselComp = document.querySelector('tlg-ad-carousel');
+
+        ajax.addEventListener('response', function(args) {
+            adCarouselComp.data = args.detail.response;
+        });
+        ajax.generateRequest();
+        
+    });
+    </script>
+</body>
+
+</html>

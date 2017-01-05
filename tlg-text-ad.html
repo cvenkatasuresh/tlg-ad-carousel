@@ -1,0 +1,166 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="webfontloader.html" />
+<dom-module id="tlg-text-ad">
+    <template>
+        <style>
+        /* local DOM styles go here */
+        
+        :host {
+            display: inline-block;
+        }
+        
+        .font-roboto {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .font-opensans {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .font-12 {
+            font-size: 12px;
+        }
+        
+        .font-14 {
+            font-size: 14px;
+        }
+        
+        .font-16 {
+            font-size: 16px;
+        }
+        
+        .font-18 {
+            font-size: 18px;
+        }
+        
+        .bgcolor-beige {
+            background-color: beige;
+        }
+        
+        .bgcolor-blue {
+            background-color: blue;
+        }
+        
+        .bgcolor-coral {
+            background-color: coral;
+        }
+        
+        .bgcolor-gray {
+            background-color: gray;
+        }
+        </style>
+        <!-- local DOM goes here -->
+        <div id="dealContent">
+            <div>{{title}}</div>
+            <div>{{adContent}}</div>
+        </div>
+    </template>
+    <script>
+    Polymer({
+        is: 'tlg-text-ad',
+
+        properties: {
+            title: {
+                type: String,
+                value: ''
+            },
+            adContent: {
+                type: String,
+                value: ''
+            },
+            fontFamily: {
+                type: String,
+                value: '',
+                observer: '_ffChanged',
+            },
+            fontSize: {
+                type: String,
+                value: '',
+                observer: '_fsChanged',
+            },
+            backgroundColor: {
+                type: String,
+                value: '',
+                observer: '_bgcChanged',
+            },
+            height: {
+                type: String,
+                value: '',
+                observer: '_heightChanged',
+            },
+
+            width: {
+                type: String,
+                value: '',
+                observer: '_widthChanged',
+            }
+        },
+
+        _ffChanged: function(newVal, oldVal) {
+            if (!newVal)
+                return;
+
+            var fonts = {
+                "opensans": "Open Sans:300",
+                "roboto": "Roboto:300"
+            };
+
+            var selectedFont = fonts[this.fontFamily.toLowerCase().replace(' ', '')];
+            WebFont.load({
+                google: {
+                    families: [selectedFont]
+                }
+            });
+
+            if (oldVal) {
+                this._removeCssClass(this.$.dealContent, 'font-' + oldVal);
+            }
+            this._addCssClass(this.$.dealContent, 'font-' + newVal);
+        },
+
+        _fsChanged: function(newVal, oldVal) {
+            if (!newVal)
+                return;
+
+            if (oldVal) {
+                this._removeCssClass(this.$.dealContent, 'font-' + oldVal);
+            }
+            this._addCssClass(this.$.dealContent, 'font-' + newVal);
+        },
+
+        _bgcChanged: function(newVal, oldVal) {
+            if (!newVal)
+                return;
+
+            if (oldVal) {
+                this._removeCssClass(this.$.dealContent, 'bgcolor-' + oldVal);
+            }
+            this._addCssClass(this.$.dealContent, 'bgcolor-' + newVal);
+        },
+
+        _widthChanged: function() {
+            this.$.dealContent.style.width = isNaN(this.width) ? this.width : this.width + 'px';
+        },
+
+        _heightChanged: function() {
+            this.$.dealContent.style.height = isNaN(this.height) ? this.height : this.height + 'px';
+        },
+
+        _addCssClass: function(el, className) {
+            if (el.classList)
+                el.classList.add(className)
+            else if (!hasClass(el, className)) el.className += " " + className
+        },
+
+        _removeCssClass: function(el, className) {
+            if (el.classList)
+                el.classList.remove(className)
+            else if (hasClass(el, className)) {
+                var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+                el.className = el.className.replace(reg, ' ')
+            }
+        }
+
+    });
+    </script>
+</dom-module>

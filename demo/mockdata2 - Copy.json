@@ -1,0 +1,68 @@
+[{
+    "url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_153_b.jpg",
+    "title": "Image 1",
+    "type": "image",
+    "targetUrl": "http://bookairfare.com",
+    "openInNewWindow": false,
+    "id": 1
+}, {
+    "url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_154_b.jpg",
+    "title": "Image 2",
+    "type": "image",
+    "targetUrl": "http://bookairfare.com",
+    "openInNewWindow": false,
+    "id": 2
+}, {
+    "url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_156_b.jpg",
+    "title": "Image 3",
+    "type": "image",
+    "targetUrl": "http://bookairfare.com",
+    "openInNewWindow": false,
+    "id": 3
+}, 
+{    
+    "title": "Text ad 1",
+    "content": "Text ad content 1",
+    "fontFamily": "opensans",
+    "fontSize": "14",
+    "backgroundColor": "blue",
+    "type": "text",
+    "targetUrl": "http://bookairfare.com",
+    "openInNewWindow": true,
+    "id": 4
+},
+{    
+    "title": "Text ad 2",
+    "content": "Text ad content 2",
+    "fontFamily": "roboto",
+    "fontSize": "18",
+    "backgroundColor": "beige",
+    "type": "text",
+    "targetUrl": "http://google.com",
+    "openInNewWindow": false,
+    "id": 5
+},
+{
+    "url": "https://cdn.spacetelescope.org/archives/images/large/heic1007a.jpg",
+    "title": "Image 1",
+    "type": "image",
+    "targetUrl": "http://bookairfare.com",
+    "openInNewWindow": true,
+    "id": 6
+}, {
+    "url": "http://wallpapersite.com/images/pages/pic_w/1917.jpg",
+    "title": "Image 2",
+    "type": "image",
+    "targetUrl": "http://bookairfare.com",
+    "openInNewWindow": false,
+    "id": 7
+},
+{
+    "url": "https://vimeo.com/27591952",    
+    "type": "video",
+    "id": 8
+},{
+    "url": "https://www.youtube.com/watch?v=HbFTlidFXMc",    
+    "type": "video",
+    "id": 9
+}]

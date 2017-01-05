@@ -1,0 +1,266 @@
+<link rel="import" href="../polymer/polymer.html" />
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html" />
+<link rel="import" href="../t-image/t-image.html" />
+<link rel="import" href="tlg-carousel.html" />
+<link rel="import" href="tlg-video-ad.html" />
+<link rel="import" href="tlg-text-ad.html" />
+<dom-module id="tlg-ad-carousel">
+    <template>
+        <style include="iron-positioning">
+        :host {
+            display: block;
+            position: relative;
+        }
+        
+        #backoverlay {
+            display: none;
+        }
+        </style>
+        <tlg-carousel id="carousel" my-swipe="{{carousel}}" start-slide="{{startSlide}}" speed="{{speed}}" auto-slide-interval="{{autoSlideInterval}}" continuous="{{continuous}}" disable-scroll="{{disableScroll}}" no-arrow="{{noArrow}}" stop-propagation="{{stopPropagation}}" selected="{{selected}}">
+        </tlg-carousel>
+        
+    </template>
+</dom-module>
+<script>
+Polymer({
+    is: "tlg-ad-carousel",
+
+    properties: {
+
+
+        data: {
+            type: Array,
+            value: function() {
+                return [];
+            },
+            notify: true
+        },
+
+
+        carousel: {
+            type: Object,
+            value: function() {
+                return null;
+            },
+            notify: true
+        },
+
+
+        /**
+         * Integer (default:0) - index position Swipe should start at
+         */
+        startSlide: {
+            type: Number,
+            value: 0
+        },
+
+        /**
+         * Integer (default:300) - speed of prev and next transitions in milliseconds.
+         */
+        speed: {
+            type: Number,
+            value: 300
+        },
+
+        /**
+         * Integer - slide show interval time & should be grater than zero (time in milliseconds between slides)
+         */
+        autoSlideInterval: {
+            type: Number,
+            value: 10000
+        },
+
+        /**
+         * Boolean (default:true) - create an infinite feel with no endpoints
+         */
+        continuous: {
+            type: Boolean,
+            value: true
+        },
+
+
+
+        /**
+         * Boolean (default:false) - stop any touches on this container from scrolling the page
+         */
+        disableScroll: {
+            type: Boolean,
+            value: false
+        },
+
+        /**
+         * Boolean (default:false) - remove arrow from the slide
+         */
+        noArrow: {
+            type: Boolean,
+            value: false
+        },
+
+        /**
+         * Boolean (default:false) - stop event propagation
+         */
+        stopPropagation: {
+            type: Boolean,
+            value: false
+        },
+
+        selected: {
+            type: Number,
+            notify: true
+        },
+
+    },
+    observers: [
+        'runSetUp(data)'
+
+    ],
+    listeners: {
+        'slide-change': '_setSrcOnChange'
+    },
+
+
+    _setSrc: function() {
+        // this._imgItems = Polymer.dom(this.$.carousel).querySelectorAll('t-image');
+        // //for  the current slide 
+        // var startIndex = this.startSlide,
+        //     lstImgIndex = this.data.length - 1;
+        // this._loadImg(startIndex);
+        // //for 1 minus the current one considering he can come back
+        // if (startIndex == 0) {
+        //     this._loadImg(lstImgIndex);
+        // } else {
+        //     this._loadImg(startIndex - 1);
+        // }
+        // //for 1 plus the current one considering he can go forward
+        // if (startIndex == lstImgIndex) {
+        //     this._loadImg(0);
+        // } else {
+        //     this._loadImg(startIndex + 1);
+        // }
+    },
+
+    _setSrcOnChange: function(element, index) {
+        // nextSlideIndex = index + 1 > this.data.length - 1 ? 0 : (index + 1),
+        //     previousSlideIndex = index - 1 < 0 ? this.data.length - 1 : index - 1;
+        // if (this._imgItems[nextSlideIndex].src.length <= 0) {
+        //     this._loadImg(nextSlideIndex);
+        // }
+        // if (this._imgItems[previousSlideIndex].src.length <= 0) {
+        //     this._loadImg(previousSlideIndex);
+        // }
+    },
+
+    // _loadImg: function(index) {
+    //     this._imgItems[index].src = this.data[index];
+    // },
+
+    /**
+     * Function - slide to prev
+     */
+    prev: function() {
+        this.$.carousel.prev()
+    },
+
+    /**
+     * Function - slide to next
+     */
+    next: function() {
+        this.$.carousel.next();
+
+    },
+
+    /**
+     * Function - slide to next
+     */
+    runSetUp: function() {
+        if (!this.data || !this.data.length) {
+            return;
+        }
+
+        Polymer.dom(this.$.carousel).innerHTML = "";   
+
+        //If there are only two items then swipe plugin creates 2 more clones of them and initiates carousel.
+        //In this process few components are not loading properly, so added hack to skip that swipe logic
+        var _data = this.data;
+        // if (this.data.length == 2) {
+        //     _data.push(_data[0]);
+        //     //_data.push(_data[1]);
+        // }   
+
+        for (var i = 0; i < _data.length; i++) {
+            var deal = _data[i];
+            var adComp = null;
+
+            if (deal.type.toLowerCase() == 'image') {
+                var adComp = document.createElement('a');
+                var imgComp = document.createElement('t-image');
+
+
+                imgComp.width = this.style.width;
+                imgComp.height = this.style.height;
+                imgComp.src = deal.url;
+                imgComp.title = deal.title;
+
+                adComp.href = deal.targetUrl;
+                if (deal.openInNewWindow) {
+                    adComp.target = "_blank";
+                }
+
+                adComp.appendChild(imgComp);
+            } else if (deal.type.toLowerCase() == 'video') {
+                var adComp = document.createElement('tlg-video-ad');
+                adComp.width = this.style.width;
+                adComp.height = this.style.height;
+                adComp.url = deal.url;
+                //adComp.title= deal.title;
+                //adComp.imageUrl = deal.imageUrl;
+            } else if (deal.type.toLowerCase() == 'text') {
+                var adComp = document.createElement('a');
+                var textComp = document.createElement('tlg-text-ad');
+
+                textComp.width = this.style.width;
+                textComp.height = this.style.height;
+                textComp.title = deal.title;
+                textComp.adContent = deal.content;
+                textComp.fontFamily = deal.fontFamily;
+                textComp.fontSize = deal.fontSize;
+                textComp.backgroundColor = deal.backgroundColor;
+
+                adComp.href = deal.targetUrl;
+                if (deal.openInNewWindow) {
+                    adComp.target = "_blank";
+                }
+                adComp.appendChild(textComp);
+            }
+
+            Polymer.dom(this.$.carousel).appendChild(adComp);            
+        }
+
+        var comp = this;
+
+        var timeout = 50;
+        //If there are only two items then swipe plugin creates 2 more clones of them and initiates carousel.
+        //In this process few components are not loading properly, so setting more item helps image load completely and 
+        //after that clone operation works perfectly.
+        // if (this.data.length == 2) {
+        //     if (this.data[0].type.toLowerCase() == 'image' || this.data[1].type.toLowerCase() == 'image'){
+        //         timeout = 750;
+        //     }
+        // }
+
+        setTimeout(function() {
+            comp.$.carousel.style.height = this.style.height;
+            comp.$.carousel.style.width = this.style.width;
+
+            comp.$.carousel.setUpCarousel();
+        }.bind(this), timeout);
+    },
+
+    /**
+     * Function slide to set index position (duration: speed of transition in milliseconds)
+     */
+    slide: function(index, duration) {
+        this.$.carousel.slide(index, duration);
+    }
+});
+</script>
