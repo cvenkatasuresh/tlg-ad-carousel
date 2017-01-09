@@ -25,16 +25,21 @@
         background: #000;
     }
     </style>
-    <tlg-ad-carousel style="height: 300px; width: 300px"></tlg-ad-carousel>
+    <tlg-ad-carousel style="height: 100px; width: 960px"></tlg-ad-carousel>
+    <tlg-ad-carousel style="height: 200px; width: 305px"></tlg-ad-carousel>
+    <tlg-ad-carousel style="height: 416px; width: 630px"></tlg-ad-carousel>
+    <tlg-ad-carousel style="height: 50px; width: 960px"></tlg-ad-carousel>
     <iron-ajax  id="call" url="mockdata2.json" headers='{"accept": "application/json"}' content-type="application/json" handle-as="json">
 
     <script>
     document.addEventListener('WebComponentsReady', function() {
         var ajax = document.querySelector('#call');
-        var adCarouselComp = document.querySelector('tlg-ad-carousel');
+        var adCarouselComp = document.querySelectorAll('tlg-ad-carousel');
 
         ajax.addEventListener('response', function(args) {
-            adCarouselComp.data = args.detail.response;
+            for(var i = 0; i < adCarouselComp.length; i++){
+                adCarouselComp[i].data = args.detail.response;
+            }
         });
         ajax.generateRequest();
         

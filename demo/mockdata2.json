@@ -1,13 +1,13 @@
 [{
     "url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_153_b.jpg",
-    "title": "Image 1",
+    "title": "Image This is a big text",
     "type": "image",
     "targetUrl": "http://bookairfare.com",
     "openInNewWindow": false,
     "id": 1
 }, {
     "url": "https://d3mj096p5q0e20.cloudfront.net/fi/HCM/93478/460435_154_b.jpg",
-    "title": "Image 2",
+    "title": "Image 2 Image This is a big text Image This is a big text Image This is a big text ",
     "type": "image",
     "targetUrl": "http://bookairfare.com",
     "openInNewWindow": false,
